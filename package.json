@@ -1,0 +1,28 @@
+{
+  "name": "mychecklist",
+  "version": "1.0.0",
+  "description": "The Checklist Sharing Site",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/palpalikta/mychecklist.git"
+  },
+  "keywords": [
+    "checklist"
+  ],
+  "author": "LabRats",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/palpalikta/mychecklist/issues"
+  },
+  "homepage": "https://github.com/palpalikta/mychecklist#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3"
+  }
+}
