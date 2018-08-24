@@ -8,7 +8,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(
 
- 
     <Router>
         <div>
           <Route exact path='/' component={App} />
