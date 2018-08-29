@@ -1,3 +1,5 @@
+/* This component will help the users to find out the checklist which they wnat */
+
 import React from "react";
 
 const SearchBox = () => (
