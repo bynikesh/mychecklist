@@ -71,6 +71,8 @@ public/bundle.js
 
 # production
 /build
+#configuration
+/server/config
 
 # misc
 .DS_Store

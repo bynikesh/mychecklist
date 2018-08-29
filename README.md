@@ -1,4 +1,20 @@
-# PROJECT MyChecklist
+<h1 align="center">
+  <img src="images/nerd-fonts-logo.svg" alt="Mychecklist" />
+</h1>
+
+<div align="center">
+
+![Depfu](https://img.shields.io/depfu/depfu/example-ruby.svg)
+![GitHub issues](https://img.shields.io/github/issues-raw/badges/shields.svg)
+![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)
+![GitHub followers](https://img.shields.io/github/followers/espadrine.svg?style=social&label=Follow)
+
+![node](https://img.shields.io/node/v/passport.svg)
+<a href="#patched-fonts" title=""><img src="https://raw.githubusercontent.com/wiki/ryanoasis/nerd-fonts/images/faux-shield-badge-os-logos.svg?sanitize=true" alt="Nerd Fonts - OS Support"></a>
+
+</div>
+
+**Mychecklist** is a project that allow user to share theri checklist or find the checklist that they want
 
 ## Requirements
 
@@ -12,10 +28,10 @@ You should be able to run the following command after the installation procedure
 below.
 
     $ node --version
-    v0.10.24
+    v8.11.3
 
     $ npm --version
-    1.3.21
+    6.4.0
 
 #### Node installation on OS X
 
@@ -46,8 +62,8 @@ Also, be sure to have `git` available in your PATH, `npm` might need it.
 
 ## Install
 
-    $ git clone https://github.com/ORG/PROJECT.git
-    $ cd PROJECT
+    $ git https://github.com/palpalikta/mychecklist.git
+    $ cd Mychecklist
     $ npm install
 
 ### Configure app
@@ -101,21 +117,18 @@ Then it will try a production build.
 ### HTML
 
 - [Jade](http://jade-lang.com/) for some templating.
+- [Bootsrap](http://getbootstarp.com/) as a teamplating framework.
 
 ### JavaScript
 
-- [JSHint](http://www.jshint.com/docs/) is used to prevent JavaScript error.
-- [JSCS](https://npmjs.org/package/jscs) is used to check coding conventions.
-- [Browserify](http://browserify.org/) to handle allow us to write our client-side scripts with [es6 syntax](http://es6.github.io/) thanks to [es6ify](https://github.com/thlorenz/es6ify).
+- [ESLint](http://www.jshint.com/docs/) is used to prevent JavaScript error.
+- [prettei](https://npmjs.org/package/jscs) is used to check coding conventions.
 - [React](http://facebook.github.io/react) is used for UI.
 
-### CSS
+## Contributing
 
-- [cssnext](http://cssnext.putaindecode.io) is used to write futureproof CSS for CSS vendor prefix under the hood).
-
-_Autoprefixer_ is included and use [caniuse.com](http://caniuse.com/) database to avoid outdated prefixes. _You can forget CSS prefixes NOW._
-
-### Static server with Livereload
-
-The app embed for development a static connect server with livereload plugged.
-So each time you start the app, you get automatic refresh in the browser whenever you update a file.
+1. Fork it (<https://github.com/yourname/yourproject/fork>)
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
