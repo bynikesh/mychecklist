@@ -14,7 +14,7 @@
 
 </div>
 
-**Mychecklist** is a project that allow user to share theri checklist or find the checklist that they want
+**Mychecklist** In this bussy time, we all need some one to guide what to do. This app will help everyone to find different types of checklist they need. For example we have a big birthday celebration and a bunch of people are working on that how everyone will coordinate and how everyone will know what all we need to do. So here comes this app, they will find a birthday plan checklist and they can use it. Once a person have regiested with the app they can also share that checklist and they can also create their own. 
 
 ## Requirements
 
