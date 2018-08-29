@@ -7,17 +7,14 @@ import registerServiceWorker from './registerServiceWorker';
 import AddList from './components/addlist';
 import 'bootstrap/dist/css/bootstrap.css';
 
-
-
 ReactDOM.render(
+  <Router>
+    <div>
+      <Route exact path="/" component={App} />
+      <Route exact path="/add-list" component={AddList} />
+    </div>
+  </Router>,
 
-    <Router>
-        <div>
-          <Route exact path='/' component={App} />
-          <Route exact path='/add-list' component={AddList} />
-        </div>
-    </Router>,
-  
-    document.getElementById('root')
-  );
-  registerServiceWorker();
+  document.getElementById('root'),
+);
+registerServiceWorker();
