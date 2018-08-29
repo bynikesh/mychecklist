@@ -1,3 +1,4 @@
+/* This navigation component will navigate the users to the home page, addlist page and about page */
 import React, { Component } from "react";
 class Navigation extends Component {
   state = {};
