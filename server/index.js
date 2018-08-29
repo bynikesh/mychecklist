@@ -15,6 +15,7 @@ const api = express();
 api.use(logger('dev'));
 api.use(bodyParser.urlencoded({ extended: true }));
 api.use(bodyParser.json());
+api.set('secretKey', 'nodeRestApi'); // jwt secret token
 
 require('./routes/list.routes.js')(api);
 
