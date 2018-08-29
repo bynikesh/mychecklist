@@ -1,10 +1,9 @@
-// import listRouter from './routes/listRouter';
-
 const express = require('express');
 const bodyParser = require('body-parser');
 
 const port = 5000;
 const mongoose = require('mongoose');
+const logger = require('morgan');
 const dbConfig = require('./config/database.config.js');
 
 mongoose.Promise = global.Promise;
@@ -13,11 +12,13 @@ mongoose.Promise = global.Promise;
 const api = express();
 
 // initialize middleware
+api.use(logger('dev'));
 api.use(bodyParser.urlencoded({ extended: true }));
 api.use(bodyParser.json());
 
 require('./routes/list.routes.js')(api);
 
+// database connection
 mongoose
   .connect(
     dbConfig.url,
@@ -33,13 +34,14 @@ mongoose
     process.exit();
   });
 
-api.get('/', (req, res) => {
+// root route for the api
+api.get('/api', (req, res) => {
   res.json({
-    message: 'Welcome to mychecklist.',
+    message: 'Welcome to mychecklist API.',
   });
 });
-// api.use('/api/list', listRouter);
 
+// server start
 api.listen(port, () => {
   console.log(`Server is up and running on port numner ${port}`);
 });
