@@ -35,6 +35,11 @@ class Navigation extends Component {
                 About
               </a>
             </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/Login">
+                Login
+              </a>
+            </li>
           </ul>
         </div>
       </nav>
