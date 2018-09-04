@@ -1,6 +1,11 @@
-module.exports = (app) => {
-  const lists = require('../controllers/list.controller.js');
+const lists = require('../controllers/list.controller.js');
 
+/**
+ *
+ *
+ * @param {*} app
+ */
+module.exports = (app) => {
   // Create a new List
   app.post('/lists', lists.create);
 

@@ -1,29 +1,37 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const uniqueValidator = require('mongoose-unique-validator');
+const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
+const secret = require('../config').secret;
 
-const saltRounds = 10;
-// Define a schema
-const Schema = mongoose.Schema;
-const UserSchema = new Schema({
-  name: {
-    type: String,
-    trim: true,
-    required: true,
+const UserSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+      unique: true,
+      required: [true, 'cannot be empty.'],
+      lowercase: true,
+      index: true,
+    },
+    email: {
+      type: String,
+      unique: true,
+      required: [true, 'cannot be empty.'],
+      lowercase: true,
+      index: true,
+    },
+    password: {
+      String,
+      required: true,
+    },
+    date_created: {
+      type: Date,
+      default: Date.now,
+    },
   },
-  email: {
-    type: String,
-    trim: true,
-    required: true,
-  },
-  password: {
-    type: String,
-    trim: true,
-    required: true,
-  },
-});
-// hash user password before saving into database
-UserSchema.pre('save', function (next) {
-  this.password = bcrypt.hashSync(this.password, saltRounds);
-  next();
-});
-module.exports = mongoose.model('User', UserSchema);
+  { timestamps: true },
+);
+
+UserSchema.plugin(uniqueValidator, { message: 'is already taken.' });
+
+module.export = mongoose.model('User', UserSchema);
