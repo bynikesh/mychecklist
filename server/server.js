@@ -1,21 +1,27 @@
+// import of dependencies
 const express = require('express');
 const bodyParser = require('body-parser');
-
-const port = 5000;
 const mongoose = require('mongoose');
 const logger = require('morgan');
+const cors = require('cors');
 const dbConfig = require('./config/database.config.js');
 
 mongoose.Promise = global.Promise;
 
 //  initialize the api
 const api = express();
+const port = process.env.PORT || 5000;
+
+// log HTTP requests
+api.use(logger('combined'));
 
 // initialize middleware
-api.use(logger('dev'));
 api.use(bodyParser.urlencoded({ extended: true }));
 api.use(bodyParser.json());
 api.set('secretKey', 'nodeRestApi'); // jwt secret token
+
+// enable all CORS requests
+api.use(cors());
 
 require('./routes/list.routes.js')(api);
 
@@ -35,7 +41,7 @@ mongoose
     process.exit();
   });
 
-// root route for the api
+//  Routing
 api.get('/api', (req, res) => {
   res.json({
     message: 'Welcome to mychecklist API.',

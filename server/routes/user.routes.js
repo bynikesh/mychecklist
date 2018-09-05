@@ -8,15 +8,11 @@
 // 	api.route('/users/:userId').delete(User.delete);
 // });
 
-
 const express = require('express');
 
 const router = express.Router();
+const userController = require('../app/api/controllers/users');
 
-// Require the controllers WHICH WE DID NOT CREATE YET!!
-const checklist_controller = require('../controllers/product.controller');
-
-
-// a simple test url to check that all of our files are communicating correctly.
-router.get('/test', product_controller.test);
+router.post('/register', userController.create);
+router.post('/authenticate', userController.authenticate);
 module.exports = router;
