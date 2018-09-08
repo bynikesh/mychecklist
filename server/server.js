@@ -10,27 +10,29 @@ require('./config/passport');
 
 mongoose.Promise = global.Promise;
 
-const user = require('./routes/user.routes.js');
-const list = require('./routes/list.routes.js');
-const auth = require('./routes/auth.routes.js');
+const users = require('./routes/api/user.routes');
+const lists = require('./routes/api/list.routes.js');
+const profile = require('./routes/api/profile.routes.js');
 
 //  initialize the api
 const api = express();
 const port = process.env.PORT || CONFIG.PORT;
 
-// log HTTP requests
-api.use(logger('combined'));
-
 // initialize middleware
 api.use(bodyParser.urlencoded({ extended: true }));
 api.use(bodyParser.json());
-api.set('secretKey', 'nodeRestApi'); // jwt secret token
+
+// log HTTP requests
+api.use(logger('combined'));
+
+// passport midelware
+// api.set('secretKey', 'nodeRestApi'); // jwt secret token
 api.use(passport.initialize());
+// passport configs
 require('./config/passport')(passport);
+
 // enable all CORS requests
 api.use(cors());
-
-require('./routes/list.routes.js')(api);
 
 // database connection
 mongoose
@@ -49,9 +51,9 @@ mongoose
   });
 
 //  Routing
-api.use('/api/user', user);
-api.use('/api/list', list);
-api.use('/api/auth', auth);
+api.use('/api/users', users);
+api.use('/api/list', lists);
+api.use('/api/profile', profile);
 
 api.get('/api', (req, res) => {
   res.json({

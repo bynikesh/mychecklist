@@ -1,24 +1,25 @@
-const JWTStrategy = require('passport-jwt').Strategy;
-const ExtractJWT = require('passport-jwt').ExtractJwt;
-const mongoose = require('mongoose');
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+const CONFIG = require('../config/config');
 
-const User = mongoose.model('User');
+const User = require('../models/User.model');
+
 const opts = {};
-
-opts.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = 'secret';
-
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = CONFIG.jwt_secret;
 module.exports = (passport) => {
   passport.use(
-    new JWTStrategy(opts, (jwtPayload, done) => {
-      User.findById(jwtPayload.id)
-        .then((user) => {
-          if (user) {
-            return done(null, user);
-          }
-          return done(null, false);
-        })
-        .catch(err => console.error(err));
+    new JwtStrategy(opts, (JwtPayload, done) => {
+      User.findOne({ id: JwtPayload.sub }, (err, user) => {
+        if (err) {
+          return done(err, false);
+        }
+        if (user) {
+          return done(null, user);
+        }
+        return done(null, false);
+        // or you could create a new account
+      });
     }),
   );
 };

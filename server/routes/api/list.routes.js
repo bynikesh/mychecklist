@@ -1,4 +1,4 @@
-const lists = require('../controllers/list.controller.js');
+const lists = require('../../controllers/list.controller.js');
 
 /**
  *
