@@ -7,6 +7,8 @@ const CONFIG = require('../../config/config');
 
 const router = express.Router();
 const User = require('../../models/User.model');
+const validateRegisterInput = require('../../lib/register');
+const validateloginInput = require('../../lib/login');
 
 /**
  * @route GET api/users/test
@@ -24,7 +26,15 @@ router.get('/test', (req, res) => {
  * @description user registration
  *@access public
  */
+
 router.post('/register', (req, res) => {
+  const { errors, isValid } = validateRegisterInput(req.body);
+  // check validation
+  if (!isValid) {
+    console.log(errors);
+    return res.status(401).json(errors);
+  }
+
   User.findOne({ email: req.body.email }).then((user) => {
     if (user) {
       return res.status(400).json({ email: 'email already exists' });
@@ -54,12 +64,17 @@ router.post('/register', (req, res) => {
  * @access Public
  */
 router.post('/login', (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
+  const { email, password } = req.body;
+  // const email = req.body.email;
+  // const password = req.body.password;
+  const { errors, isValid } = validateloginInput(req.body);
+  if (!isValid) {
+    res.status(401).json(errors);
+  }
   // find user by email
   User.findOne({ email }).then((user) => {
     if (!user) {
-      return res.status(400).json({ email: 'üser not found' });
+      return res.status(401).json({ email: 'üser not found' });
     }
     // check password
     bcrypt.compare(password, user.password).then((isMatch) => {
