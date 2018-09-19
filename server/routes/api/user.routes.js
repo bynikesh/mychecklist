@@ -31,13 +31,14 @@ router.post('/register', (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
   // check validation
   if (!isValid) {
-    console.log(errors);
-    return res.status(401).json(errors);
+    // console.log(errors);
+    return res.status(400).json(errors);
   }
 
   User.findOne({ email: req.body.email }).then((user) => {
     if (user) {
-      return res.status(400).json({ email: 'email already exists' });
+      errors.email = 'Email already exist';
+      return res.status(401).json(errors);
     }
     const newUser = new User({
       name: req.body.name,

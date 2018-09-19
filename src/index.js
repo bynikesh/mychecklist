@@ -1,30 +1,20 @@
+/**
+ *  Copyright (c) 2018
+ *
+ * main starting poin for the frontend
+ *
+ * @summary main starting point of the app
+ * @author Nikesh Adhikari
+ *
+ * Created at     : 2018-09-09 19:29:51
+ * Last modified  : 2018-09-10 14:57:09
+ */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-
 import App from './App';
-import Navigation from './components/navigation';
 import registerServiceWorker from './registerServiceWorker';
-import AddList from './components/addlist';
-// import Home from './components/searchbox';
-import Register from './pages/auth/signup';
-import Login from './pages/auth/login';
-import 'bootstrap/dist/css/bootstrap.css';
 
-ReactDOM.render(
-  <div>
-    <Router>
-      <div>
-        <Navigation />
-        <Route exact path="/" component={App} />
-        <Route exact path="/add-list" component={AddList} />
-        <Route exact path="/add-list" component={AddList} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
-      </div>
-    </Router>
-  </div>,
+ReactDOM.render(<App />, document.getElementById('root'));
 
-  document.getElementById('root'),
-);
 registerServiceWorker();

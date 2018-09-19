@@ -1,7 +1,12 @@
-const List = require('../models/list.model.js');
-
-// Create and Save a new List
-
+// const passport = require('passport');
+const List = require('../models/List.model.js');
+// const lists = require('../../controllers/list.controller.js');
+const Profile = require('../models/Profile.model');
+/**
+ * @route :POST api/list/
+ * @description :Create and Save a new List
+ * @access Private
+ */
 exports.create = (req, res) => {
   // Validate request
   if (!req.body.content) {
@@ -14,13 +19,14 @@ exports.create = (req, res) => {
   const list = new List({
     title: req.body.title || 'Untitled List',
     content: req.body.content,
+    user: req.user.id,
   });
 
   // Save List in the database
   list
     .save()
     .then((data) => {
-      res.send(data);
+      res.json(data);
     })
     .catch((err) => {
       res.status(500).send({
@@ -28,8 +34,11 @@ exports.create = (req, res) => {
       });
     });
 };
-
-// Retrieve and return all lists from the database.
+/**
+ * @route :GET api/list/
+ * @description Retrieve and return all lists from the database.
+ * @access Private
+ */
 exports.findAll = (req, res) => {
   List.find()
     .then((lists) => {
@@ -41,8 +50,11 @@ exports.findAll = (req, res) => {
       });
     });
 };
-
-// Find a single List with a ListId
+/**
+ * @route :GET api/list/:listId
+ * @description find a single list with the listid
+ * @access Private
+ */
 exports.findOne = (req, res) => {
   List.findById(req.params.listId)
     .then((list) => {
@@ -64,8 +76,12 @@ exports.findOne = (req, res) => {
       });
     });
 };
+/**
+ * @route :GET api/list/:listId
+ * @description update a list with the listid in the request
+ * @access Private
+ */
 
-// Update a List identified by the ListId in the request
 exports.update = (req, res) => {
   // Validate Request
   if (!req.body.content) {
