@@ -23,6 +23,9 @@ class Register extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
+    }
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
@@ -53,7 +56,7 @@ class Register extends Component {
 
   render() {
     const { errors } = this.state;
-    const { user } = this.props.auth;
+    // const { user } = this.props.auth;
     return (
       <div className="container" style={{ marginTop: '50px', width: '700px' }}>
         <h2 style={{ marginBottom: '40px' }}>Registration</h2>
