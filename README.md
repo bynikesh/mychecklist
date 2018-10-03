@@ -216,6 +216,7 @@ To run those 3 commands you can just do
   - **`components`**: contains code for the component templates.
 
 ## Languages & tools
+Visual studio code for editing code
 
 ### HTML
 
