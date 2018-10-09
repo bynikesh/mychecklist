@@ -12,6 +12,7 @@ mongoose.Promise = global.Promise;
 
 const users = require('./routes/api/user.routes');
 const lists = require('./routes/api/list.routes.js');
+const posts = require('./routes/api/post.routes.js');
 const profile = require('./routes/api/profile.routes.js');
 
 //  initialize the api
@@ -53,6 +54,7 @@ mongoose
 //  Routing
 api.use('/api/users', users);
 api.use('/api/list', lists);
+api.use('/api/post', posts);
 api.use('/api/profile', profile);
 
 api.get('/api', (req, res) => {

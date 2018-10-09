@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
-import SelectListGroup from '../common/SelectListGroup';
 import { createProfile } from '../../actions/profileActions';
 
 class CreateProfile extends Component {
@@ -14,18 +13,12 @@ class CreateProfile extends Component {
     this.state = {
       displaySocialInputs: false,
       handle: '',
-      company: '',
-      website: '',
       location: '',
-      status: '',
-      skills: '',
-      githubusername: '',
       bio: '',
       twitter: '',
       facebook: '',
       linkedin: '',
-      youtube: '',
-      instagram: '',
+      github: '',
       errors: {}
     };
 
@@ -50,7 +43,7 @@ class CreateProfile extends Component {
       facebook: this.state.facebook,
       linkedin: this.state.linkedin,
       github: this.state.github,
-    
+
     };
 
     this.props.createProfile(profileData, this.props.history);
@@ -104,19 +97,19 @@ class CreateProfile extends Component {
             error={errors.github}
           />
 
-        
+
         </div>
       );
     }
 
-   
+
     return (
       <div className="create-profile">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Create Your Profile</h1>
-            
+
               <small className="d-block pb-3">* required fields</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
@@ -127,24 +120,22 @@ class CreateProfile extends Component {
                   error={errors.handle}
                   info="A unique handle for your profile URL."
                 />
-                
-                
-                
+
                 <TextFieldGroup
                   placeholder="Location"
                   name="location"
                   value={this.state.location}
                   onChange={this.onChange}
-                  error={errors.location}
+                 // error={errors.location}
                   info="Please add Your Full address eg. (Topryde, NSW, 2112, Sydney)"
                 />
-              
+
                 <TextAreaFieldGroup
                   placeholder="Short Bio"
                   name="bio"
                   value={this.state.bio}
                   onChange={this.onChange}
-                  error={errors.bio}
+                  // error={errors.bio}
                   info="Tell us a little about yourself"
                 />
 
@@ -152,8 +143,9 @@ class CreateProfile extends Component {
                   <button
                     type="button"
                     onClick={() => {
+                      //toggle the social inputs form
                       this.setState(prevState => ({
-                        displaySocialInputs: !prevState.displaySocialInputs
+                        displaySocialInputs: !prevState.displaySocialInputs,
                       }));
                     }}
                     className="btn btn-light"
@@ -178,15 +170,17 @@ class CreateProfile extends Component {
 }
 
 CreateProfile.propTypes = {
+
+  createProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
   profile: state.profile,
-  errors: state.errors
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps, { createProfile })(
-  withRouter(CreateProfile)
+  withRouter(CreateProfile),
 );

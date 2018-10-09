@@ -13,9 +13,8 @@ const ProfileSchema = new Schema({
     lowercase: true,
     max: 30,
   },
-  gender: {
+  bio: {
     type: String,
-    required: true,
   },
   social: {
     github: { type: String },
@@ -27,5 +26,5 @@ const ProfileSchema = new Schema({
     type: String,
   },
 });
-
-module.exports = mongoose.model('Profile', ProfileSchema);
+module.exports = Profile = mongoose.model('profile', ProfileSchema);
+// module.exports = mongoose.model('profile', ProfileSchema);

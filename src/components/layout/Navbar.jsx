@@ -4,10 +4,14 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
+import { clearCurrentProfile } from '../../actions/profileActions';
+// mport { clearCurrentProfile } from '../../actions/profileActions';
+import logo from '../../logo.png';
 
 class Navbar extends Component {
   onlogoutClick(e) {
     e.preventDefault();
+    this.props.clearCurrentProfile();
     this.props.logoutUser();
   }
 
@@ -15,14 +19,38 @@ class Navbar extends Component {
 
 	render() {
 	  const { isAuthenticated, user } = this.props.auth;
+	  // const { profile, landing } = this.props.profile;
 
 	  const authLinks = (
   <ul className="navbar-nav ml-auto">
-    <li className="nav-item navbar-right">
-      <a href="" onClick={this.onlogoutClick.bind(this)} className="nav-link">
-						Logout
-
+    <li className="nav-item dropdown">
+      <a
+        className="nav-link dropdown-toggle"
+        href="#"
+        id="navbarDropdown"
+        role="button"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        {user.name}
       </a>
+      <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+        <Link className="dropdown-item" to="/profile">
+							Profile
+
+        </Link>
+
+        <a className="dropdown-item" href="#">
+							Account Setting
+
+        </a>
+        <div className="dropdown-divider" />
+        <a onClick={this.onlogoutClick.bind(this)} className="dropdown-item">
+							Logout
+
+        </a>
+      </div>
     </li>
   </ul>
 	  );
@@ -47,8 +75,8 @@ class Navbar extends Component {
 	  return (
   <nav className="navbar navbar-expand-lg navbar-light bg-light">
     <a className="navbar-brand" href="#">
-					Mychecklist
-
+      <img src={logo} width="30" height="30" alt="" />
+      <span className="navbar-brand mb-0 h1">MyChecklist</span>
     </a>
     <button
       className="navbar-toggler"
@@ -64,7 +92,7 @@ class Navbar extends Component {
     <div className="collapse navbar-collapse" id="navbarNav">
       <ul className="navbar-nav">
         <li className="nav-item active">
-          <a className="nav-link" href="/">
+          <a className="nav-link" href={isAuthenticated ? '/dashboard' : '/'}>
 								Home
             {' '}
             <span className="sr-only">(current)</span>
@@ -73,6 +101,12 @@ class Navbar extends Component {
         <li className="nav-item">
           <a className="nav-link" href="/add-list">
 								Addlist
+
+          </a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href="/feed">
+								List fedd
 
           </a>
         </li>
@@ -91,15 +125,20 @@ class Navbar extends Component {
 }
 
 Navbar.propTypes = {
+  getCurrentProfile: PropTypes.func.isRequired,
+  // profile: PropTypes.object.isRequired,
+
   logoutUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   // errors: PropTypes.object.isRequired,
 };
 const mapStateToProps = state => ({
+  profile: state.profile,
+
   auth: state.auth,
   // errors: state.errors,
 });
 export default connect(
   mapStateToProps,
-  { logoutUser },
+  { logoutUser, clearCurrentProfile },
 )(Navbar);

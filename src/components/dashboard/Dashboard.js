@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
+import ProfileSettings from './ProfileSettings';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -19,14 +20,16 @@ class Dashboard extends Component {
     if (profile === null || loading) {
       dashboardContent = <Spinner />;
     } else {
+      //  dashboardContent = <h2>hello</h2>;
       // Check if logged in user has profile data
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
           <h4>
-						TODO: DISPLAY PROFILE
-
-            {profile.handle}
-            {profile.location}
+						Welcome
+            {' '}
+            {user.name}
+            <br />
+            <ProfileSettings />
           </h4>
         );
       } else {
@@ -66,6 +69,7 @@ class Dashboard extends Component {
 Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
+
   profile: PropTypes.object.isRequired,
 };
 

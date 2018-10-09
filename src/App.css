@@ -1,0 +1,10 @@
+.dropdown-menu {
+	position: absolute;
+	top: 100%;
+	left: -55px;
+	z-index: 1000;
+}
+
+.navbar-light .navbar-brand {
+	color: teal;
+}

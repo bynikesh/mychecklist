@@ -3,7 +3,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import jwtDecode from 'jwt-decode';
 import setAuthToken from './util/setAuthToken';
+
 import { setCurrentUser, logoutUser } from './actions/authActions';
+import { clearCurrentProfile } from './actions/profileActions';
+
 import store from './store';
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -13,12 +16,16 @@ import Navbar from './components/layout/Navbar';
 import AddList from './components/addlist';
 import Dashboard from './components/dashboard/Dashboard';
 import CreateProfile from './components/create-profile/CreateProfile';
+import EditProfile from './components/create-profile/EditProfile';
 import Footer from './components/layout/Footer';
 import Register from './components/auth/register';
 import Login from './components/auth/login';
 import Searchbox from './components/searchbox';
-import { clearCurrentProfile } from './actions/profileActions';
+import Profiles from './components/profile/Profiles';
+import Lists from './components/lists/Lists';
+import Posts from './components/posts/Posts';
 
+import './App.css';
 // check for token
 if (localStorage.jwtToken) {
   // set header auth token
@@ -53,10 +60,13 @@ const App = () => (
           <Route exact path="/" component={Searchbox} />
           <Route exact path="/add-list" component={AddList} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/Profiles" component={Profiles} />
           <Route exact path="/login" component={Login} />
           <Switch>
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <PrivateRoute exact path="/create-profile" component={CreateProfile} />
+            <PrivateRoute exact path="/edit-profile" component={EditProfile} />
+            <PrivateRoute exact path="/feed" component={Posts} />
           </Switch>
         </div>
         <div />
